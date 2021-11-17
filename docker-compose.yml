@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  openwrt:
+    image: lede:test
+    privileged: true
+    networks:
+      openwrt-LAN:
+        ipv4_address: "192.168.10.1"
+    ports:
+     - "80:80"
+
+networks:
+  # openwrt-WAN:
+  #   driver: macvlan
+  #   driver_opts:
+  #     parent: eth0
+  #   ipam:
+  #     config:
+  #       - gateway: "192.168.2.1"
+  #         subnet: "192.168.2.0/24"
+
+
+  openwrt-LAN:
+    driver: bridge
+    # internal: true
+    ipam:
+      config:
+        - gateway: "192.168.10.2"
+          subnet: "192.168.10.0/24"
